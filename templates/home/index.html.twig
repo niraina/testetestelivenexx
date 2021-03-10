@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="text-center my-2">Liste des tâches</h1>
+    <a href="{{ path('nouveau') }}"><button type="button" class="btn btn-outline-primary">+</button></a>
+        
+        <button class="btn btn-success my-3" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            {{ stats.taches }} tache en cours...
+        </button>
+{% for tache in taches %} 
+    <div class="card border-dark my-3">
+        <div class="card-header">
+            <h4 class="card-title">
+                 {{ tache.titre }}
+    <a href="{{ path('supprimer', {'id': tache.id}) }}">
+        <button type="button" class="btn btn-outline-danger ">X</button>
+    </a>
+            </h4>
+        </div>
+
+        <div class="card-body">
+            
+            <p class="card-text">{{ tache.introduction }}</p>
+            <p>{{ tache.detail }}</p><a href="{{ path('modifier', {'id': tache.id}) }}">
+                <button type="button" class="btn btn-outline-warning my-3 ml-6">Modifier</button>
+            </a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
